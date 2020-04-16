@@ -1,13 +1,13 @@
 {
   "name": "tasky",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "App to create ideas",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
+  "author": "Tomiwa Adedokun",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
