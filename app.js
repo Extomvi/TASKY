@@ -53,6 +53,29 @@ app.get('/about', (req, res) => {
   res.render('about');
 });
 
+// Idea Index Page
+app.get('/ideas', (req, res) => {
+  Idea.find({})
+    .sort({ date: 'desc' })
+    .then(ideas => {
+      res.render('ideas/index', {
+        ideas: ideas
+      });
+    });
+});
+
+// Edit Idea Form
+app.get('/ideas/edit/:id', (req, res) => {
+  Idea.findOne({
+    _id: req.params.id
+  })
+    .then(ideas => {
+      res.render('ideas/edit', {
+        ideas: ideas
+      });
+    });
+});
+
 // Add Idea Form
 app.get('/ideas/add', (req, res) => {
   res.render('ideas/add');
@@ -62,14 +85,14 @@ app.get('/ideas/add', (req, res) => {
 app.post('/ideas', (req, res) => {
   let errors = [];
 
-  if(!req.body.title){
-    errors.push({text:'Please add a title'});
+  if (!req.body.title) {
+    errors.push({ text: 'Please add a title' });
   }
-  if(!req.body.details){
-    errors.push({text:'Please add some details'});
+  if (!req.body.details) {
+    errors.push({ text: 'Please add some details' });
   }
 
-  if(errors.length > 0){
+  if (errors.length > 0) {
     res.render('ideas/add', {
       errors: errors,
       title: req.body.title,
@@ -90,7 +113,7 @@ app.post('/ideas', (req, res) => {
 
 const port = 5000;
 
-app.listen(port, () =>{
+app.listen(port, () => {
   console.log('Server started on port ' + port);
 
 });
