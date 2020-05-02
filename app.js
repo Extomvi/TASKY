@@ -56,21 +56,9 @@ app.get('/about', (req, res) => {
 // Idea Index Page
 app.get('/ideas', (req, res) => {
   Idea.find({})
-    .sort({ date: 'desc' })
+    .sort({date: 'desc'})
     .then(ideas => {
       res.render('ideas/index', {
-        ideas: ideas
-      });
-    });
-});
-
-// Edit Idea Form
-app.get('/ideas/edit/:id', (req, res) => {
-  Idea.findOne({
-    _id: req.params.id
-  })
-    .then(ideas => {
-      res.render('ideas/edit', {
         ideas: ideas
       });
     });
@@ -79,6 +67,19 @@ app.get('/ideas/edit/:id', (req, res) => {
 // Add Idea Form
 app.get('/ideas/add', (req, res) => {
   res.render('ideas/add');
+});
+
+
+// Edit Idea Form
+app.get('/ideas/edit/:id', (req, res) => {
+  Idea.findOne({
+    _id: req.params.id
+  })
+  .then(idea => {
+    res.render('ideas/edit', {
+      idea:idea
+    });
+  });
 });
 
 // Process Form
